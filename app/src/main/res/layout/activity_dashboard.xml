@@ -14,7 +14,7 @@
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:text="Your Upcoming Events"
+        android:text="Upcoming Events"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,15 +30,16 @@
 
     </android.support.design.widget.BottomNavigationView>
 
+    
+
     <ListView
         android:id="@+id/event_list_view"
-        android:layout_width="379dp"
-        android:layout_height="517dp"
+        android:layout_width="383dp"
+        android:layout_height="488dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
