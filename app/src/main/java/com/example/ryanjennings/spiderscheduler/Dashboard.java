@@ -11,6 +11,10 @@ import android.widget.ArrayAdapter;
 
 import android.util.Log;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.io.*;
 
@@ -50,10 +54,30 @@ public class Dashboard extends AppCompatActivity {
         mListView = (ListView) findViewById(R.id.event_list_view);
 // 1
         ArrayList<Event> eventList = new ArrayList<Event>();
-        Log.d("warning","before");
+
+        try {
+            Scanner sc = new Scanner(getResources().openRawResource(R.raw.events));
+            sc.nextLine();
+            while (sc.hasNext()) {
+                String line = sc.nextLine();
+                String[] tokens = line.split(",");
+                int type = Integer.parseInt(tokens[0]);
+                DateFormat format = new SimpleDateFormat("MM-dd-yy", Locale.ENGLISH);
+                Date date = format.parse(tokens[4]);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:m a");
+                LocalTime time_start = LocalTime.parse(tokens[5], DateTimeFormatter.ofPattern("h:m a"));
+                LocalTime time_end = LocalTime.parse(tokens[6], DateTimeFormatter.ofPattern("h:m a"));
+                Event event = new Event(type, tokens[1], tokens[2], tokens[3], date, time_start, time_end);
+                eventList.add(event);
+            }
+            sc.close();
+        } catch(Exception e){
+                //
+        }
+
+
         try {
             eventList = Event.readCSV("events.csv", this);
-            Log.d("warning","in this block");
         }
         catch(Exception E) {
             Log.d("warning","error");
@@ -62,11 +86,9 @@ public class Dashboard extends AppCompatActivity {
         String[] listItems = new String[eventList.size()];
 
 // 3
-        Log.d("warning",(" " + eventList.size()));
         for(int i = 0; i < eventList.size(); i++){
             Event event = eventList.get(i);
             listItems[i] = event.event_name;
-            Log.d("warning",event.event_name);
         }
 // 4
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, listItems);
