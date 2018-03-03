@@ -1,9 +1,10 @@
+/*
 package com.example.ryanjennings.spiderscheduler;
 import android.os.Bundle;
 
-/**
+
  * Created by ryanjennings on 3/3/18.
- */
+
 
 public class Home extends Dashboard {
 
@@ -16,3 +17,4 @@ public class Home extends Dashboard {
 
         }
 }
+*/
